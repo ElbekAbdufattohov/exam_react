@@ -2,7 +2,7 @@ import React from 'react'
 
 const SinglPage = () => {
   return (
-    <div>SinglPageeeeee</div>
+    <div>Tez orada Singl boldi</div>
   )
 }
 

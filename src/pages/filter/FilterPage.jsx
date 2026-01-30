@@ -2,7 +2,7 @@ import React from 'react'
 
 const FilterPage = () => {
   return (
-    <div>FilterPage</div>
+    <div>Tez orada bu joyda Filter boladi</div>
   )
 }
 

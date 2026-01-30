@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div>Tez orada bu joyda Fotter boladi</div>
   )
 }
 
