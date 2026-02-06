@@ -15,10 +15,8 @@ export default function Header() {
   return (
     <>
       <header className="fixed left-0 top-0 z-50 w-full">
-        {/* Main navbar */}
-        <div className="border-b bg-white">
+        <div className="border-b bg-white xl:px-25">
           <div className="mx-auto flex h-20 max-w-7xl items-center gap-3 px-4 sm:gap-6">
-            {/* Mobile: hamburger */}
             <button
               className="rounded p-2 text-gray-900 hover:bg-gray-100 md:hidden"
               onClick={() => setOpen(true)}
@@ -26,28 +24,23 @@ export default function Header() {
               <LuMenu className="h-6 w-6" />
             </button>
 
-            {/* Logo - Bosh sahifaga */}
             <NavLink to="/" className="text-2xl font-black tracking-tight">
               SHOP.CO
             </NavLink>
 
-            {/* Nav links (Desktop) */}
             <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
               <NavLink to="/" className={activeStyle}>
                 Home <span className="text-gray-400">▾</span>
               </NavLink>
               <NavLink to="/filter" className={activeStyle}>
-                filter
+                Filter
               </NavLink>
               <NavLink to="/cart" className={activeStyle}>
                 Cart
               </NavLink>
-              <NavLink to="/product/:id" className={activeStyle}>
-                Singl
-              </NavLink>
+              
             </nav>
 
-            {/* Search (Desktop) */}
             <div className="hidden flex-1 items-center md:flex">
               <div className="relative w-full max-w-2xl">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
@@ -61,7 +54,6 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Right icons */}
             <div className="ml-auto flex items-center gap-2 sm:gap-4">
               <button className="rounded p-2 text-gray-900 hover:bg-gray-100 md:hidden">
                 <CiSearch className="h-6 w-6" />
@@ -78,7 +70,6 @@ export default function Header() {
           </div>
           
 
-          {/* Mobile menu (Sidebar) */}
           <div className={`md:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}>
             <div
               onClick={() => setOpen(false)}
@@ -96,7 +87,7 @@ export default function Header() {
                 <NavLink to="/" onClick={() => setOpen(false)} className={activeStyle}>Home</NavLink>
                 <NavLink to="/filter" onClick={() => setOpen(false)} className={activeStyle}>Filter</NavLink>
                 <NavLink to="/cart" onClick={() => setOpen(false)} className={activeStyle}>Cart</NavLink>
-                <NavLink to="/product/:id" onClick={() => setOpen(false)} className={activeStyle}>Brands</NavLink>
+                
                 <hr className="my-2" />
                 <NavLink to="/cart" onClick={() => setOpen(false)} className={activeStyle}>My Cart</NavLink>
               </nav>
@@ -105,9 +96,10 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Spacer */}
       <div className="pt-30" />
     </>
   );
 }
+
+
 

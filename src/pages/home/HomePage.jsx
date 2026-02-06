@@ -1,75 +1,154 @@
-import React from 'react';
-import femily from "../../assets/femily.jpg"
+import React, { useState } from 'react';
+import ProductCard from '../../components/ProductCard';
+import hero from "../../assets/hero.jpg";
+import useFetch from '../../hooks/useFetch';
+import img11 from "../../assets/11.png";
+import img12 from "../../assets/12.png";
+import img13 from "../../assets/13.png";
+import img14 from "../../assets/14.png";
+
 const HomePage = () => {
-  return (
-    <div className="bg-[#F2F0F1] min-h-screen font-sans overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          
-          <div className="z-10">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-4 tracking-tighter">
-              FIND CLOTHES <br /> THAT MATCHES <br /> YOUR STYLE
-            </h1>
-            <p className="text-gray-600 text-sm md:text-base mb-8 max-w-md">
-              Browse through our diverse range of meticulously crafted garments, 
-              designed to bring out your individuality and cater to your sense of style.
-            </p>
-            
-            <button className="bg-black text-white px-12 py-4 rounded-full cursor-pointer text-lg font-medium hover:bg-gray-800 transition-all w-full md:w-auto">
-              Shop Now
-            </button>
+  const [openedCategory, setOpenedCategory] = useState(null);
+  // data — bu endi mahsulotlar massivi
+  const { data: products, isLoading } = useFetch({ url: "products", key: ["products"] });
 
-            <div className="flex flex-wrap gap-8 mt-12">
-              <div>
-                <h3 className="text-2xl md:text-4xl font-bold">200+</h3>
-                <p className="text-gray-500 text-sm">International Brands</p>
-              </div>
-              <div className="border-l border-gray-300 h-12 hidden md:block"></div>
-              <div>
-                <h3 className="text-2xl md:text-4xl font-bold">2,000+</h3>
-                <p className="text-gray-500 text-sm">High-Quality Products</p>
-              </div>
-              <div className="border-l border-gray-300 h-12 hidden md:block"></div>
-              <div>
-                <h3 className="text-2xl md:text-4xl font-bold">30,000+</h3>
-                <p className="text-gray-500 text-sm">Happy Customers</p>
-              </div>
-            </div>
-          </div>
+  const allCategories = products ? [...new Set(products.map((el) => el.category))] : [];
 
-          <div className="relative h-[400px] md:h-[600px] flex items-end">
-            <div className="absolute top-10 right-0 animate-pulse">
-              <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0L54.1 45.9L100 50L54.1 54.1L50 100L45.9 54.1L0 50L45.9 45.9L50 0Z" fill="black"/>
-              </svg>
-            </div>
-            
-            <div className="absolute top-1/2 left-0 animate-bounce">
-              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0L54.1 45.9L100 50L54.1 54.1L50 100L45.9 54.1L0 50L45.9 45.9L50 0Z" fill="black"/>
-              </svg>
-            </div>
+  function viewMore(category) {
+    setOpenedCategory(openedCategory === category ? null : category);
+  }
 
-            <img 
-              src={femily} 
-              alt="Fashion Models" 
-              className="w-full h-full object-cover z-0"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-black py-8">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-6 opacity-90">
-          <span className="text-white text-2xl md:text-3xl font-serif font-bold italic">VERSACE</span>
-          <span className="text-white text-2xl md:text-3xl font-serif font-bold tracking-widest">ZARA</span>
-          <span className="text-white text-2xl md:text-3xl font-sans font-bold uppercase tracking-tighter">GUCCI</span>
-          <span className="text-white text-2xl md:text-3xl font-serif font-black uppercase">PRADA</span>
-          <span className="text-white text-2xl md:text-3xl font-sans font-medium">Calvin Klein</span>
-        </div>
-      </div>
+  if (isLoading) return (
+    <div className='w-full h-screen flex items-center justify-center text-2xl font-bold'>
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
+      <span className="ml-3">Yuklanmoqda...</span>
     </div>
   );
-};
+
+  return (
+    <main className="overflow-x-hidden">
+      {/* Hero Section */}
+      <section className="bg-[#F2F0F1] overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center">
+            <div className="pt-10 pb-10 lg:pt-24 lg:pb-24 lg:w-1/2 text-center lg:text-left">
+              <h1 className="text-[36px] font-black uppercase leading-[1.1] tracking-tighter text-black sm:text-[56px] lg:text-[64px]">
+                Find clothes <br className="hidden sm:block" /> that matches <br className="hidden sm:block" /> your style
+              </h1>
+              <p className="mt-5 mx-auto lg:mx-0 max-w-lg text-[14px] leading-relaxed text-black/60 sm:text-base">
+                Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality.
+              </p>
+              <button className="mt-8 w-full sm:w-auto inline-flex h-14 items-center justify-center rounded-full bg-black px-12 text-base font-medium text-white transition hover:scale-105 active:scale-95">
+                Shop Now
+              </button>
+
+              <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-6 lg:gap-10">
+                <Stat value="200+" label="Brands" />
+                <Stat value="2,000+" label="Products" />
+                <Stat value="30,000+" label="Customers" />
+              </div>
+            </div>
+
+            <div className="relative w-full lg:w-1/2">
+              <img src={hero} alt="Hero" className="w-full h-auto object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <section className='container mx-auto px-4 py-16 lg:px-10'>
+        {allCategories.map((category) => (
+          <div key={category} className='mb-20 border-b pb-12 last:border-none'>
+            <h2 className='text-center uppercase text-[28px] md:text-[40px] font-black mb-10'>
+              {category}
+            </h2>
+
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8'>
+              {products
+                ?.filter(item => item.category === category)
+                ?.slice(0, openedCategory === category ? 12 : 4)
+                ?.map(el => (
+                  <ProductCard key={el.id} {...el} />
+                ))
+              }
+            </div>
+
+            <div className='flex justify-center mt-12'>
+              <button
+                onClick={() => viewMore(category)}
+                className='border-2 border-black/10 px-12 py-3 rounded-full font-bold hover:bg-black hover:text-white transition-all'
+              >
+                {openedCategory === category ? "Yopish" : "Hammasini ko'rish"}
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <div>
+          <div className="mx-auto max-w-7xl bg-[#F0F0F0] rounded-[40px] p-6 md:p-16">
+
+            {/* Sarlavha */}
+            <h2 className="mb-10 text-center text-[32px] md:text-[48px] font-black uppercase tracking-tight text-black">
+              Browse by dress style
+            </h2>
+
+            {/* Grid sistemasi */}
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+
+              {/* 1. Casual - Kichikroq box */}
+              <div className="relative h-[190px] md:h-[289px] overflow-hidden rounded-[20px] bg-white group cursor-pointer">
+                <span className="absolute left-6 top-6 z-10 text-[24px] md:text-[36px] font-bold text-black">
+                  Casual
+                </span>
+                <div className="w-full h-full bg-gray-200">
+                 <img src={img11} alt="" />
+                </div>
+              </div>
+
+              {/* 2. Formal - Kattaroq box (2 qismni egallaydi) */}
+              <div className="relative h-[190px] md:h-[289px] md:col-span-2 overflow-hidden rounded-[20px] bg-white group cursor-pointer">
+                <span className="absolute left-6 top-6 z-10 text-[24px] md:text-[36px] font-bold text-black">
+                  Formal
+                </span>
+                <div className="w-full h-full bg-gray-300">
+                 <img src={img12} alt="" />
+                </div>
+              </div>
+
+              {/* 3. Party - Kattaroq box (2 qismni egallaydi) */}
+              <div className="relative h-[190px] md:h-[289px] md:col-span-2 overflow-hidden rounded-[20px] bg-white group cursor-pointer">
+                <span className="absolute left-6 top-6 z-10 text-[24px] md:text-[36px] font-bold text-black">
+                  Party
+                </span>
+                <div className="w-full h-full bg-gray-300">
+                  <img src={img13} alt="" />
+                </div>
+              </div>
+
+              {/* 4. Gym - Kichikroq box */}
+              <div className="relative h-[190px] md:h-[289px] overflow-hidden rounded-[20px] bg-white group cursor-pointer">
+                <span className="absolute left-6 top-6 z-10 text-[24px] md:text-[36px] font-bold text-black">
+                  Gym
+                </span>
+                <div className="w-full h-full bg-gray-200">
+                  <img src={img14} alt="" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+const Stat = ({ value, label }) => (
+  <div className="text-center lg:text-left border-r border-black/10 last:border-none pr-6">
+    <span className="block text-2xl lg:text-3xl font-bold">{value}</span>
+    <span className="text-xs lg:text-sm text-black/60">{label}</span>
+  </div>
+);
 
 export default HomePage;
