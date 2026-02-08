@@ -101,7 +101,7 @@ const HomePage = () => {
                 <span className="absolute left-6 top-6 z-10 text-[24px] md:text-[36px] font-bold text-black">
                   Casual
                 </span>
-                <div className="w-full h-full bg-gray-200">
+                <div className="w-full h-full absolute left-35 top-5 bg-gray-200">
                  <img src={img11} alt="" />
                 </div>
               </div>
